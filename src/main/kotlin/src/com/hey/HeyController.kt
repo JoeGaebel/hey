@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServletResponse
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.ClassPathResource
 
 
 @Controller
 class HeyController {
-    private val video = File("src/main/resources/static/Hey!.mp4")
+    private val video = ClassPathResource("/static/Hey!.mp4").file
 
     @Autowired
     private val handler: MyResourceHttpRequestHandler? = null

@@ -32,7 +32,6 @@ repositories {
 
 jar {
     baseName = 'hey'
-    version = '0.1.0'
 }
 
 dependencies {
