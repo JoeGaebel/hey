@@ -26,6 +26,11 @@ class HeyController {
         return "/index.html"
     }
 
+    @GetMapping(path = arrayOf("/plain"), produces = arrayOf("video/mp4"))
+    fun plain(): FileSystemResource {
+        return FileSystemResource(video)
+    }
+
     @GetMapping("/video")
     @Throws(ServletException::class, IOException::class)
     fun home(request: HttpServletRequest, response: HttpServletResponse) {
