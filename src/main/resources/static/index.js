@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementsByTagName('video')[0];
+const video = document.getElementById('video');
+
+video.play();
+
+video.addEventListener('click', () => {
     video.play();
 });

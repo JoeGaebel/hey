@@ -43,3 +43,7 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
     compile("org.springframework.boot:spring-boot-devtools")
 }
+
+bootRun {
+    sourceResources sourceSets.main
+}
