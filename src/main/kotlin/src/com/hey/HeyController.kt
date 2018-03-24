@@ -16,38 +16,26 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @Controller
 class HeyController {
-    private val MP4_FILE = File("src/main/resources/static/Hey!.mp4")
+    private val video = File("src/main/resources/static/Hey!.mp4")
 
     @Autowired
     private val handler: MyResourceHttpRequestHandler? = null
-
-    // supports byte-range requests
-    @GetMapping("/video")
-    @Throws(ServletException::class, IOException::class)
-    fun home(
-            request: HttpServletRequest,
-            response: HttpServletResponse
-    ) {
-
-        request.setAttribute(MyResourceHttpRequestHandler.ATTR_FILE, MP4_FILE)
-        handler!!.handleRequest(request, response)
-    }
-
-    // does not support byte-range requests
-    @GetMapping(path = arrayOf("/plain"), produces = arrayOf("video/mp4"))
-    fun plain(): FileSystemResource {
-        return FileSystemResource(MP4_FILE)
-    }
 
     @GetMapping("/")
     fun hey(): String {
         return "/index.html"
     }
+
+    @GetMapping("/video")
+    @Throws(ServletException::class, IOException::class)
+    fun home(request: HttpServletRequest, response: HttpServletResponse) {
+        request.setAttribute(MyResourceHttpRequestHandler.ATTR_FILE, video)
+        handler!!.handleRequest(request, response)
+    }
 }
 
 @Component
 internal class MyResourceHttpRequestHandler : ResourceHttpRequestHandler() {
-
     @Throws(IOException::class)
     override fun getResource(request: HttpServletRequest): Resource {
         val file = request.getAttribute(ATTR_FILE) as File
